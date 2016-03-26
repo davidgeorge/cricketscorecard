@@ -61,7 +61,7 @@ XpUnitTest(ObstructingDismissalTest, "Testing Obstructing the Field")
 
    std::stringstream os;
    os << oDismissal;
-   std::string sExpected = "obstructing field b Steve Waugh";
+   std::string sExpected = "obstructing the field b Steve Waugh";
    XpAssertEqual("Check the dismissal is printed correctly", sExpected, os.str());
 }
 

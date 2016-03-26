@@ -4,6 +4,7 @@
 #include <string>
 #include <map>
 #include <iostream>
+#include <functional>
 
 namespace Cricket
 {
@@ -19,40 +20,49 @@ namespace Cricket
      , EHandleBall
    };
    
-   const std::map<EDismissalType, std::string> DismissalDescription = 
-   {
-        { EDismissalType::ENotOut,       "Not Out"           }
-      , { EDismissalType::EBowled,       "b"                 }
-      , { EDismissalType::ELBW,          "lbw"               }
-      , { EDismissalType::ECaught,       "c"                 }
-      , { EDismissalType::ERunOut,       "run out"           }
-      , { EDismissalType::EObstructing,  "obstructing field" }
-      , { EDismissalType::EHandleBall,   "handled ball"      }
-   };
-   
    class Dismissal
    {
+     const std::string DISMISSAL_NotOut   = "not out"; 
+     const std::string DISMISSAL_RunOut   = "run out";
+     const std::string DISMISSAL_Bowled   = "b";
+     const std::string DISMISSAL_LBW      = "lbw";
+     const std::string DISMISSAL_Caught   = "c";
+     const std::string DISMISSAL_Obstruct = "obstructing the field";
+     const std::string DISMISSAL_Handled  = "handled ball";
+      
      public:
       Dismissal() = delete;
       Dismissal(const Dismissal&) = delete;
       Dismissal& operator=(const Dismissal&) = delete;
 
      public:
-      Dismissal(EDismissalType eType);
-      Dismissal(EDismissalType eType, const std::string& sBowler);
       Dismissal(EDismissalType eType, const std::string& sBowler, const std::string sFielder);
+      Dismissal(EDismissalType eType, const std::string& sBowler);
+      Dismissal(EDismissalType eType);
       ~Dismissal() = default;
 
       inline EDismissalType Type()        const { return eType_m;    }
-      inline const std::string& Bowled()  const { return sBowler_m;  }
-      inline const std::string& Fielded() const { return sFielder_m; }
+      inline const std::string& Bowler()  const { return sBowler_m;  }
+      inline const std::string& Fielder() const { return sFielder_m; }
 
       friend std::ostream& operator<<(std::ostream& os, const Dismissal& dt);
 
      private:
+      std::string DismissalText() const;
+      std::string NotOut() const;
+      std::string Bowled() const;
+      std::string LBW() const;
+      std::string Caught() const;
+      std::string RunOut() const;
+      std::string Obstructing() const;
+      std::string HandleBall() const;
+
       EDismissalType eType_m;
       std::string sBowler_m;
       std::string sFielder_m;
+      
+      typedef std::function<std::string(const Dismissal&)> DismissalStream; 
+      std::map<EDismissalType, DismissalStream> DismissalDispatch_m;
    };
    
 } // namespace Cricket
