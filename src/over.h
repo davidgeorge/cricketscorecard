@@ -3,6 +3,7 @@
 
 #include "ball.h"
 #include <vector>
+#include <iostream>
 
 namespace Cricket
 {
@@ -24,6 +25,8 @@ namespace Cricket
       bool IsOverComplete() const;
       bool IsMaiden() const;
       int Runs() const;
+
+      friend std::ostream& operator<<(std::ostream& os, const Over& oOver);
 
      private:
       std::vector<Ball> oBalls_m;

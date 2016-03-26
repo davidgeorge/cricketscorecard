@@ -47,3 +47,13 @@ bool Over::IsMaiden() const
 {
    return IsOverComplete() && Runs() == 0;   
 }
+
+namespace Cricket
+{
+   std::ostream& operator<<(std::ostream& os, const Over& oOver)
+   {
+      const auto& oB = oOver.oBalls_m;
+      std::for_each(begin(oB), end(oB), [&](const Ball oBall) { os << oBall << " "; });
+      return os;
+   }
+}
