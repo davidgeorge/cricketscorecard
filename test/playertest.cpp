@@ -5,6 +5,28 @@
 
 using namespace Cricket;
 
+XpUnitTest(BatsmanStrikeRateTest, "Testing the Batsman's strike rate")
+{
+   Batsman steveWaugh("Steve Waugh", "Australia");
+   // Score 100 runs in 100 balls
+   steveWaugh.BringToCrease();
+   for (int i = 0; i < 100; i++) { steveWaugh.FaceBall(1); }
+   XpAssertEqual("Expecting a strike rate of 100", 100.00, steveWaugh.StrikeRate());
+   
+   Batsman glennMcGrath("Glenn McGrath", "Australia");
+   glennMcGrath.BringToCrease();
+   for (int i = 0; i < 10; i++) { glennMcGrath.FaceBall(1); }
+   for (int i = 0; i < 90; i++) { glennMcGrath.FaceBall(0); }
+   XpAssertEqual("Expecting a strike rate of 10", 10.00, glennMcGrath.StrikeRate());
+   
+   Batsman adamGilchrist("Adam Gilchrist", "Australia");
+   adamGilchrist.BringToCrease();
+   for (int i = 0; i < 10; i++) { adamGilchrist.FaceBall(2); }
+   adamGilchrist.FaceBall(6);
+   adamGilchrist.FaceBall(6);
+   XpAssertEqual("Expecting a strike rate of 266.66", 266.66, glennMcGrath.StrikeRate());
+}
+
 XpUnitTest(BatsmanTest, "Testing the Batsman")
 {
    std::string sName = "Steve Waugh";

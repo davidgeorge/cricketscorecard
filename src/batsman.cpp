@@ -28,3 +28,8 @@ void Batsman::Dismiss(const Dismissal& oDismissal)
    bDismissed_m = true;
    oDismissal_m = oDismissal;
 }
+
+double Batsman::StrikeRate() const
+{
+   double dStrikeRate = ((double)iRuns_m / iBallsFaced_m) * 100;
+}

@@ -21,7 +21,8 @@ namespace Cricket
        void BringToCrease();
        void FaceBall(int runs);
        void Dismiss(const Dismissal& oDismissal);
-
+       
+       double StrikeRate() const;
        inline bool Batting()                  const { return bBatting_m;    }
        inline bool Dismissed()                const { return bDismissed_m;  }
        inline int Runs()                      const { return iRuns_m;       }
