@@ -5,11 +5,21 @@ using namespace Cricket;
 Ball::Ball(EBallType eType, int iRuns)
   : eType_m(eType)
   , iRuns_m(iRuns)
-{}
+{
+   if (iRuns == 0 && eType_m == EBallType::ERun)
+   {
+      eType_m = EBallType::EDot;  
+   }
+}
 
 Ball::Ball(EBallType eType)
   : Ball(eType, 0)
-{}
+{
+   if (eType_m == EBallType::EWide || eType_m == EBallType::ENoBall)
+   {
+      iRuns_m = 1;
+   }
+}
 
 EBallType Ball::BallType() const
 {
@@ -24,4 +34,17 @@ int Ball::Runs() const
 bool Ball::LegalDelivery() const
 {
    return eType_m != EBallType::ENoBall && eType_m != EBallType::EWide;
+}
+
+namespace Cricket
+{
+   std::ostream& operator<<(std::ostream& os, const Ball& oBall)
+   {
+      if (oBall.iRuns_m != 0)
+      {
+         os << oBall.iRuns_m;
+      }
+      os << oBall.BallDisplayMap.at(oBall.eType_m);
+      return os;
+   }   
 }

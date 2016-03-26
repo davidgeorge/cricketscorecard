@@ -1,6 +1,10 @@
 #ifndef INCLUDE_BALLH
 #define INCLUDE_BALLH
 
+#include <iostream>
+#include <string>
+#include <map>
+
 namespace Cricket
 {
 
@@ -17,6 +21,17 @@ namespace Cricket
    
    class Ball
    {
+      const std::map<EBallType, std::string> BallDisplayMap =
+      {
+          { EBallType::EDot,    "."  }
+        , { EBallType::ERun,    ""   }
+        , { EBallType::EWide,   "wd" }
+        , { EBallType::ENoBall, "nb" }
+        , { EBallType::EBye,    "b"  }
+        , { EBallType::ELegBye, "lb" }
+        , { EBallType::EWicket, "W"  }
+      };
+
      public:
       Ball() = delete;
       Ball& operator=(const Ball&) = delete;
@@ -30,6 +45,8 @@ namespace Cricket
       EBallType BallType() const;
       int Runs()           const;
       bool LegalDelivery() const;
+
+      friend std::ostream& operator<<(std::ostream& os, const Ball& oBall);
 
      private:
       EBallType eType_m;
