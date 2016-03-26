@@ -41,6 +41,11 @@ namespace Cricket
       Dismissal(EDismissalType eType);
       Dismissal(EDismissalType eType, const std::string& sBowler);
       Dismissal(EDismissalType eType, const std::string& sBowler, const std::string sFielder);
+      ~Dismissal() = default;
+
+      inline EDismissalType Type()        const { return eType_m;    }
+      inline const std::string& Bowled()  const { return sBowler_m;  }
+      inline const std::string& Fielded() const { return sFielder_m; }
 
       friend std::ostream& operator<<(std::ostream& os, const Dismissal& dt);
 

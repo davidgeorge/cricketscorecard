@@ -7,19 +7,19 @@ namespace Cricket
 {
    class Player
    {
-   public:
+     public:
       Player() = delete;
       Player(const Player&) = delete;
       Player& operator=(const Player&) = delete;
       
-   public:
+     public:
       Player(const std::string& sName, const std::string& sTeam);
       ~Player() = default;
    
-      const std::string& Name() const;
-      const std::string& Team() const;
+      inline const std::string& Name() const { return sName_m; }
+      inline const std::string& Team() const { return sTeam_m; }
 
-   private:
+     private:
       std::string sName_m;
       std::string sTeam_m; 
    };

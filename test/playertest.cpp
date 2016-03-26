@@ -20,11 +20,11 @@ XpUnitTest(BatsmanTest, "Testing the Batsman")
    XpAssertEqual("Test batsman is now batting", true, batsman.Batting());
    XpAssertEqual("Test batsman's is not dismissed", false, batsman.Dismissed());
 
-   batsman.AddRuns(0);
+   batsman.ScoreRuns(0);
    XpAssertEqual("Test batsman has scored no runs", 0, batsman.Runs());
-   batsman.AddRuns(2);
+   batsman.ScoreRuns(2);
    XpAssertEqual("Test batsman has scored runs", 2, batsman.Runs());
-   batsman.AddRuns(4);
+   batsman.ScoreRuns(4);
    XpAssertEqual("Test batsman has scored runs", 6, batsman.Runs());
    
    batsman.Dismiss();
