@@ -31,5 +31,5 @@ void Batsman::Dismiss(const Dismissal& oDismissal)
 
 double Batsman::StrikeRate() const
 {
-   double dStrikeRate = ((double)iRuns_m / iBallsFaced_m) * 100;
+   return ((double)iRuns_m / iBallsFaced_m) * 100;
 }
