@@ -19,17 +19,20 @@ namespace Cricket
        ~Batsman() = default;
 
        void BringToCrease();
-       void ScoreRuns(int runs);
+       void FaceBall(int runs);
        void Dismiss(const Dismissal& oDismissal);
 
-       inline bool Batting()   const { return bBatting_m;   }
-       inline bool Dismissed() const { return bDismissed_m; }
-       inline int Runs()       const { return iRuns_m;      }
+       inline bool Batting()                  const { return bBatting_m;    }
+       inline bool Dismissed()                const { return bDismissed_m;  }
+       inline int Runs()                      const { return iRuns_m;       }
+       inline int BallsFaced()                const { return iBallsFaced_m; }
+       inline const Dismissal& GetDismissal() const { return oDismissal_m;  }
 
       private:
        bool bDismissed_m;
        bool bBatting_m;
        int iRuns_m;
+       int iBallsFaced_m;
        Dismissal oDismissal_m;
    };
    
