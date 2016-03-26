@@ -10,7 +10,7 @@ dismissaltest:
 	g++ -std=c++11  src/dismissal.cpp test/dismissaltest.cpp -o dismissaltest
 
 overtest:
-	g++ -std=c++11  src/over.cpp test/overtest.cpp -o overtest
+	g++ -std=c++11  src/over.cpp src/ball.cpp test/overtest.cpp -o overtest
 
 clean:
 	rm playertest
