@@ -1,5 +1,4 @@
 #include "dismissal.h"
-#include <functional>
 
 using namespace Cricket;
 
@@ -8,13 +7,7 @@ Dismissal::Dismissal(EDismissalType eType, const std::string& sBowler, const std
   , sBowler_m(sBowler)
   , sFielder_m(sFielder)
 {
-   DismissalDispatch_m[EDismissalType::ENotOut]      = std::bind(&Dismissal::NotOut, this);
-   DismissalDispatch_m[EDismissalType::EBowled]      = std::bind(&Dismissal::Bowled, this);
-   DismissalDispatch_m[EDismissalType::ELBW]         = std::bind(&Dismissal::LBW, this);
-   DismissalDispatch_m[EDismissalType::ECaught]      = std::bind(&Dismissal::Caught, this);
-   DismissalDispatch_m[EDismissalType::ERunOut]      = std::bind(&Dismissal::RunOut, this);
-   DismissalDispatch_m[EDismissalType::EObstructing] = std::bind(&Dismissal::Obstructing, this);
-   DismissalDispatch_m[EDismissalType::EHandleBall]  = std::bind(&Dismissal::HandleBall, this);
+   InitialiseDismissalMap();
 }
 
 Dismissal::Dismissal(EDismissalType eType, const std::string& sBowler)
@@ -24,6 +17,35 @@ Dismissal::Dismissal(EDismissalType eType, const std::string& sBowler)
 Dismissal::Dismissal(EDismissalType eType)
   : Dismissal(eType, "", "")
 {}
+
+Dismissal::Dismissal(const Dismissal& oDis)
+{
+   *this = oDis;
+}
+
+Dismissal& Dismissal::operator=(const Dismissal& oDis)
+{
+   if (&oDis != this)
+   {
+      this->eType_m    = oDis.eType_m;
+      this->sBowler_m  = oDis.sBowler_m;
+      this->sFielder_m = oDis.sFielder_m;
+      InitialiseDismissalMap();
+   }
+ 
+   return *this;
+}
+
+void Dismissal::InitialiseDismissalMap()
+{
+   DismissalDispatch_m[EDismissalType::ENotOut]      = std::bind(&Dismissal::NotOut, this);
+   DismissalDispatch_m[EDismissalType::EBowled]      = std::bind(&Dismissal::Bowled, this);
+   DismissalDispatch_m[EDismissalType::ELBW]         = std::bind(&Dismissal::LBW, this);
+   DismissalDispatch_m[EDismissalType::ECaught]      = std::bind(&Dismissal::Caught, this);
+   DismissalDispatch_m[EDismissalType::ERunOut]      = std::bind(&Dismissal::RunOut, this);
+   DismissalDispatch_m[EDismissalType::EObstructing] = std::bind(&Dismissal::Obstructing, this);
+   DismissalDispatch_m[EDismissalType::EHandleBall]  = std::bind(&Dismissal::HandleBall, this);
+}
 
 std::string Dismissal::DismissalText() const
 {

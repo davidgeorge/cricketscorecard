@@ -2,6 +2,7 @@
 #define INCLUDE_BATSMANH
 
 #include "player.h"
+#include "dismissal.h"
 
 namespace Cricket
 {
@@ -19,7 +20,7 @@ namespace Cricket
 
        void BringToCrease();
        void ScoreRuns(int runs);
-       void Dismiss();
+       void Dismiss(const Dismissal& oDismissal);
 
        inline bool Batting()   const { return bBatting_m;   }
        inline bool Dismissed() const { return bDismissed_m; }
@@ -29,6 +30,7 @@ namespace Cricket
        bool bDismissed_m;
        bool bBatting_m;
        int iRuns_m;
+       Dismissal oDismissal_m;
    };
    
 } // namespace Cricket

@@ -32,13 +32,13 @@ namespace Cricket
       
      public:
       Dismissal() = delete;
-      Dismissal(const Dismissal&) = delete;
-      Dismissal& operator=(const Dismissal&) = delete;
 
      public:
       Dismissal(EDismissalType eType, const std::string& sBowler, const std::string sFielder);
       Dismissal(EDismissalType eType, const std::string& sBowler);
       Dismissal(EDismissalType eType);
+      Dismissal(const Dismissal& oDis);
+      Dismissal& operator=(const Dismissal& oDis);
       ~Dismissal() = default;
 
       inline EDismissalType Type()        const { return eType_m;    }
@@ -48,6 +48,7 @@ namespace Cricket
       friend std::ostream& operator<<(std::ostream& os, const Dismissal& dt);
 
      private:
+      void InitialiseDismissalMap();
       std::string DismissalText() const;
       std::string NotOut() const;
       std::string Bowled() const;

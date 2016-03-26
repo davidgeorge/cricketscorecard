@@ -1,6 +1,7 @@
 #include "../testframework/xpunitest.h"
 #include "../src/player.h"
 #include "../src/batsman.h"
+#include "../src/dismissal.h"
 
 using namespace Cricket;
 
@@ -27,7 +28,8 @@ XpUnitTest(BatsmanTest, "Testing the Batsman")
    batsman.ScoreRuns(4);
    XpAssertEqual("Test batsman has scored runs", 6, batsman.Runs());
    
-   batsman.Dismiss();
+   Dismissal oDismissal(EDismissalType::EBowled, "Steve Waugh");
+   batsman.Dismiss(oDismissal);
    XpAssertEqual("Test batsman is no longer batting", false, batsman.Batting());
    XpAssertEqual("Test batsman's has been dismissed", true, batsman.Dismissed());
 }

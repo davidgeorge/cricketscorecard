@@ -5,6 +5,22 @@
 
 using namespace Cricket;
 
+XpUnitTest(CopyConstructorTest, "Testing the Dismissal Copy Constructor")
+{
+   Dismissal oDis1(EDismissalType::EBowled, "Steve Waugh");
+   Dismissal oDis2 = oDis1;
+   
+   XpAssertEqual("Check bowler", oDis1.Bowler(), oDis2.Bowler());
+   XpAssertEqual("Check fielder", oDis1.Fielder(), oDis2.Fielder());
+   
+   std::stringstream os1;
+   std::stringstream os2;
+   os1 << oDis1;
+   os2 << oDis2;
+
+   XpAssertEqual("Check stream", os1.str(), os2.str());
+}
+
 XpUnitTest(NotOutDismissalTest, "Testing Not Out")
 {
    Dismissal oDismissal(EDismissalType::ENotOut);
