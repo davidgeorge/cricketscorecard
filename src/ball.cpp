@@ -12,6 +12,21 @@ Ball::Ball(EBallType eType, int iRuns)
    }
 }
 
+Ball::Ball(const Ball& oBall)
+{
+   *this = oBall;
+}
+
+Ball& Ball::operator=(const Ball& oBall)
+{
+   if (this != &oBall)
+   {
+      this->eType_m = oBall.eType_m;
+      this->iRuns_m = oBall.iRuns_m;
+   }
+   return *this;
+}
+
 Ball::Ball(EBallType eType)
   : Ball(eType, 0)
 {

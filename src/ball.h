@@ -34,13 +34,14 @@ namespace Cricket
 
      public:
       Ball() = delete;
-      Ball& operator=(const Ball&) = delete;
      
      public:
       Ball(EBallType eType);
       Ball(EBallType eType, int iRuns);
-      Ball(const Ball&) = default;
+      Ball(const Ball& oBall);
       ~Ball() = default;
+      
+      Ball& operator=(const Ball& oBall);
       
       EBallType BallType() const;
       int Runs()           const;

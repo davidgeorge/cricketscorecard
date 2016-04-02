@@ -9,6 +9,21 @@ Over::Over()
   : bComplete_m(false)
 {}
 
+Over::Over(const Over& oOver)
+{
+   *this = oOver; 
+}
+
+Over& Over::operator=(const Over& oOver)
+{
+   if (this != &oOver)
+   {
+      this->oBalls_m    = oOver.oBalls_m;
+      this->bComplete_m = oOver.bComplete_m;   
+   }
+   return *this;
+}
+
 void Over::AddBall(const Ball& oBall)
 {
    if (!bComplete_m)
@@ -43,6 +58,19 @@ int Over::Runs() const
    return runs;
 }
 
+int Over::Wickets() const
+{
+   int wickets = 0;
+   std::for_each(begin(oBalls_m), end(oBalls_m), [&](const Ball& oB)
+   {
+      if (oB.BallType() == EBallType::EWicket)
+      {
+         wickets++;
+      }
+   });
+   return wickets;
+}
+
 bool Over::IsMaiden() const
 {
    return IsOverComplete() && Runs() == 0;   
@@ -52,8 +80,7 @@ namespace Cricket
 {
    std::ostream& operator<<(std::ostream& os, const Over& oOver)
    {
-      const auto& oB = oOver.oBalls_m;
-      std::for_each(begin(oB), end(oB), [&](const Ball oBall) { os << oBall << " "; });
+      std::for_each(begin(oOver.oBalls_m), end(oOver.oBalls_m), [&](const Ball oB) { os << oB << " "; });
       return os;
    }
 }

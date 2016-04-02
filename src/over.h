@@ -10,21 +10,21 @@ namespace Cricket
 
    class Over
    {
-      const short BALLS_PER_OVER = 6;
-      
-     public:
-      Over(const Over&) = delete;
-      Over& operator=(const Over&) = delete;
+      const short BALLS_PER_OVER = 6;   
       
      public:
       Over();
+      Over(const Over&);
       ~Over() = default;
 
+      Over& operator=(const Over&);
+     
       void AddBall(const Ball& oBall);
       short LegalDeliveries() const;
       bool IsOverComplete() const;
       bool IsMaiden() const;
       int Runs() const;
+      int Wickets() const;
 
       friend std::ostream& operator<<(std::ostream& os, const Over& oOver);
 
